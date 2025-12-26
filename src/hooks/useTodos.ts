@@ -37,6 +37,15 @@ export function useTodos() {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   }, []);
 
+  const updateTodo = useCallback((id: string, text: string) => {
+    if (!text.trim()) return;
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, text: text.trim() } : todo
+      )
+    );
+  }, []);
+
   const clearCompleted = useCallback(() => {
     setTodos((prev) => prev.filter((todo) => !todo.completed));
   }, []);
@@ -58,6 +67,7 @@ export function useTodos() {
     addTodo,
     toggleTodo,
     deleteTodo,
+    updateTodo,
     clearCompleted,
     activeCount,
     completedCount,
