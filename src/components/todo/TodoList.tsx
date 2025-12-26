@@ -6,9 +6,10 @@ interface TodoListProps {
   todos: Todo[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
+  onUpdate: (id: string, text: string) => void;
 }
 
-export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
+export function TodoList({ todos, onToggle, onDelete, onUpdate }: TodoListProps) {
   return (
     <motion.div
       className="space-y-3"
@@ -22,12 +23,13 @@ export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
             key={todo.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
+            transition={{ delay: index * 0.03 }}
           >
             <TodoItem
               todo={todo}
               onToggle={onToggle}
               onDelete={onDelete}
+              onUpdate={onUpdate}
             />
           </motion.div>
         ))}
